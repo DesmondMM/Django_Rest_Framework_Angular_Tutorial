@@ -23,7 +23,12 @@ describe('PollCat App', function() {
 
       query.clear();
       query.sendKeys('2');
-      expect(qnList.count()).toBe(2);
-    });
+      expect(qnList.count()).toBe(1);
+
+
+    });query.clear();
+      query.sendKeys('3');
+      expect(qnList.count()).toBe(1);
+
   });
 });
