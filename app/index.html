@@ -1,44 +1,15 @@
 <!doctype html>
-<html lang="en" ng-app="pollcatApp">
+<html lang="en" ng-app="phonecatApp">
 <head>
-  <meta charset="utf-8">
-  <title>Poll App</title>
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" href="css/app.css">
+...
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
 </head>
-<body ng-controller="PollListCtrl">
+<body>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <!--Sidebar content-->
-
-        Search: <input ng-model="query">
-        Sort by:
-        <select ng-model="orderProp">
-          <option value="id">ID</option>
-          <option value="question_text">Question Text</option>
-        </select>
-
-      </div>
-      <div class="col-md-10">
-        <!--Body content-->
-
-  <ul class="questions">
-    <li ng-repeat="question in questions  | filter:query | orderBy:orderProp">
-      <span>{{question.id}}</span>
-      <p>{{question.question_text}}</p>
-        <p>{{question.pub_date}}</p>
-    </li>
-  </ul>
-<p>Total number of questions: {{questions.length}}</p>
-
-
-    </div>
-  </div>
-</div>
+  <div ng-view></div>
 
 </body>
 </html>
