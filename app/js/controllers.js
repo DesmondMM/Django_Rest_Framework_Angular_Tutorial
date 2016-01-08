@@ -19,4 +19,5 @@ pollcatApp.controller('PollListCtrl', function($scope) {
         "pub_date": "2015-12-29T04:57:20.466289Z"}
 
   ];
+  $scope.orderProp = 'id';
 });

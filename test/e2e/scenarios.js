@@ -16,19 +16,19 @@ describe('PollCat App', function() {
       var qnList = element.all(by.repeater('question in questions'));
       var query = element(by.model('query'));
 
-      expect(qnList.count()).toBe(4);
+      expect(qnList.count()).toBe(3);
 
       query.sendKeys('1');
-      expect(qnList.count()).toBe(1);
+      expect(qnList.count()).toBe(3);
 
       query.clear();
       query.sendKeys('2');
-      expect(qnList.count()).toBe(1);
+      expect(qnList.count()).toBe(3);
 
 
     });query.clear();
       query.sendKeys('3');
-      expect(qnList.count()).toBe(1);
+      expect(qnList.count()).toBe(2);
 
   });
 });
