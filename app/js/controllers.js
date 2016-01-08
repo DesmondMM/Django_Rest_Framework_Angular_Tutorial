@@ -7,7 +7,7 @@ var pollcatApp = angular.module('pollcatApp', []);
 pollcatApp.controller('PollListCtrl', function($scope) {
   $scope.questions = [
     {'id': 1,
-     "question_text": "Hello what's up?",
+     "question_text": "zHello what's up?",
     "pub_date": "2015-12-28T21:45:41Z"},
 
     {"id": 2,
