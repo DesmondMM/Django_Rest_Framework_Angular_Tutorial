@@ -5,17 +5,18 @@ var pollcatApp = angular.module('pollcatApp', [
 
 ]);
 
-pollcatApp.controller('PollListCtrl', ['$scope', '$http', function($scope, $http) {
-  $http.get('http://127.0.0.1:8000/?format=json').success(function(data) {
-    $scope.questions = data;
-  });
+pollcatApp.controller('QuestionDetailCtrl', ['$scope', '$routeParams', 'Qdet',
+  function($scope, $routeParams, Qdet) {
+    $scope.qdet = Qdet.get({id: $routeParams.id}, function(qdet) {
+      $scope.details = qdet.id;
+    });
+  }]);
 
-  $scope.orderProp = 'id';
-}]);
 
 pollcatApp.controller('QuestionListCtrl', ['$scope', '$http', function($scope, $http) {
   $http.get('http://localhost:8000').success(function(data) {
     $scope.questions = data;
+
   });
 
   $scope.orderProp = 'id';
@@ -36,8 +37,8 @@ pollcatApp.controller('PollListController', function($scope){
         controller: 'QuestionListCtrl'
       }).
       when('/questions/:id', {
-        templateUrl: 'partials/question-list.html',
-        controller: 'QuestionListCtrl'
+        templateUrl: 'partials/question-det.html',
+        controller: 'QuestionDetailCtrl'
       }).
       when('/add', {
         templateUrl: 'partials/add-question.html',
