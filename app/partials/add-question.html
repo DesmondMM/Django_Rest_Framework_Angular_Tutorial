@@ -11,6 +11,12 @@
                 <br />
                 <input data-ng-model="question.pub_date" type="text" placeholder="Date Published">
             </div>
+        <div class="span3">
+                Choices:
+                <br />
+                Choice 1: <input data-ng-model="choice" type="text" placeholder="Choice">
+                <p>Choice 2<input data-ng-model="choice" type="text" placeholder="Choice"></p>
+            </div>
 
-    <button id="submitCustomer" class="btn btn-primary" type="button"
+    <button id="submitQuestion" class="btn btn-primary" type="button"
                    data-ng-click="newQuestion()">Add Question</button>

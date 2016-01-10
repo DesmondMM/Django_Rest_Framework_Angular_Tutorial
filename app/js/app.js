@@ -1,15 +1,11 @@
 'use strict';
 
-var pollecatApp = angular.module('phonecatApp', [
+var pollcatApp = angular.module('pollcatApp', [
   'ngRoute',
-  'pollcatAnimations',
-
   'pollcatControllers',
-  'pollcatFilters',
-  'pollcatServices'
 ])
 
-.config(['$routeProvider',function($routeProvider) {
+pollcatApp.config(['$routeProvider',function($routeProvider) {
     $routeProvider.
       when('/', {
         template: '<h1>Welcome to Polls App</h1>',
