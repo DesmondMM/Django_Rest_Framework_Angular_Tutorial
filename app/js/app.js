@@ -5,12 +5,12 @@ var pollcatApp = angular.module('pollcatApp', [
 
 ]);
 
-pollcatApp.controller('QuestionDetailCtrl', ['$scope', '$routeParams', 'Qdet',
-  function($scope, $routeParams, Qdet) {
-    $scope.qdet = Qdet.get({id: $routeParams.id}, function(qdet) {
-      $scope.details = qdet.id;
+pollcatApp.controller('QuestionDetailCtrl', function($scope, $http, $routeParams){
+    $http.get('http://localhost:8000/' + $routeParams.id).success(function(data) {
+    $scope.detail = data;
     });
-  }]);
+
+  });
 
 
 pollcatApp.controller('QuestionListCtrl', ['$scope', '$http', function($scope, $http) {
