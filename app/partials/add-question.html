@@ -1,5 +1,20 @@
 <h1>Welcome to Add new Question</h1>
 <div>
+    <div class="span3">
+                Question_Text:
+                <br />
+                <input data-ng-model="question.question_text" type="text" placeholder="Question Text">
+            </div>
+
+    <div class="span3">
+                Date Published:
+                <br />
+                <input data-ng-model="question.pub_date" type="text" placeholder="Date Published">
+            </div>
+
+    <button id="submitCustomer" class="btn btn-primary" type="button"
+                   data-ng-click="newQuestion()">Add Question</button>
+
     <input type = 'text' ng-model="question_text'>
     <input type = 'date' ng-model = 'pub_date'>
     <input type = 'submit' ng-model=register()>
