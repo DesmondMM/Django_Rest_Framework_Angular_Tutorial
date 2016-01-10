@@ -1,4 +1,27 @@
 <div>
     <h1>Welcome to Create User Page</h1>
 
+    <div class="span3">
+                Username:
+                <br />
+                <input data-ng-model="user" type="text" placeholder="User_name" required>
+            </div>
+
+    <div class="span3">
+                Email:
+                <br />
+                <input data-ng-model="email" type="text" placeholder="email" required>
+    </div>
+
+    <div class="span3">
+                Password:
+                <br />
+                <input data-ng-model="password" type="password" placeholder="Password" required>
+                <p><input data-ng-model="retry-password" type="password" placeholder="Password" required></p>
+    </div>
+
+    <button id="submitLogin" class="btn btn-primary" type="button"
+                   data-ng-click="createUser()">Create User</button>
+</div>
+
 </div>
