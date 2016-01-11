@@ -26,6 +26,26 @@ pollcatControllers.controller('PollListController', function($scope){
 //Login Function
 
 
+pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
+  $scope.user = {username: 'john.doe', password: 'foobar'};
+  $scope.message = '';
+  $scope.submit = function () {
+    $http
+      .post('http://localhost:8000/login/', $scope.user)
+      .success(function (data, status, headers, config) {
+        $window.sessionStorage.token = data.token;
+        $scope.message = 'Welcome';
+          console.log($scope.message);
+      })
+      .error(function (data, status, headers, config) {
+        // Erase the token if the user fails to log in
+        delete $window.sessionStorage.token;
 
+        // Handle login errors here
+        $scope.message = 'Error: Invalid user or password';
+          console.log($scope.message);
+      });
+  };
+});
 
 
