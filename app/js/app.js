@@ -3,9 +3,32 @@
 var pollcatApp = angular.module('pollcatApp', [
   'ngRoute',
   'pollcatControllers',
-])
+]);
 
-pollcatApp.config(['$routeProvider',function($routeProvider) {
+pollcatApp.factory('authInterceptor', function ($rootScope, $q, $window) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token) {
+        config.headers.Authorization = 'JWT ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    response: function (response) {
+      if (response.status === 401) {
+        // handle the case where the user is not authenticated
+      }
+      return response || $q.when(response);
+    }
+  };
+});
+
+pollcatApp.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+});
+
+pollcatApp.config(['$httpProvider','$routeProvider',function($httpProvider, $routeProvider) {
+    $httpProvider.interceptors.push('authInterceptor');
     $routeProvider.
       when('/', {
         template: '<h1>Welcome to Polls App</h1>',
@@ -22,6 +45,10 @@ pollcatApp.config(['$routeProvider',function($routeProvider) {
       when('/add', {
         templateUrl: 'partials/add-question.html',
         controller: 'PollListController'
+      }).
+      when('/create_user', {
+        templateUrl: 'partials/createUser.html',
+        controller: 'createUserController'
       }).
       when('/login', {
         templateUrl: 'partials/login.html',
