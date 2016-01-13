@@ -2,11 +2,6 @@
 
 var pollcatControllers = angular.module('pollcatControllers', []);
 
-
-
-//Login Function
-
-var tk;
 pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
   $scope.user = {username: 'admin', password: 'plkplk123'};
   $scope.message = '';
@@ -32,19 +27,17 @@ pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
 });
 
 pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $routeParams){
-    $http.get('http://localhost:8000/question_list/',  + $routeParams.id).success(function(data) {
+    $http.get('http://localhost:8000/question_list/' + $routeParams.id).success(function(data) {
+        console.log("id" + $routeParams.id);
     $scope.detail = data;
     });
 
   });
 
-
 pollcatControllers.controller('QuestionListCtrl', ['$scope', '$http', function($scope, $http) {
   $http.get('http://localhost:8000/question_list/').success(function(data) {
     $scope.questions = data;
-
   });
-
   $scope.orderProp = 'id';
 }]);
 
@@ -54,8 +47,9 @@ pollcatControllers.controller('PollListController', function($scope){
 
 pollcatControllers.controller('createUserController',function($scope, $http){
 
-    $scope.newUserForm = {};
-    $scope.newUserForm.username = "";
+    $scope.newUserForm = {username: '', email: '', password: ''};
+
+
 
     $scope.onSubmit = function(){
         console.log("submitted");
@@ -64,7 +58,7 @@ pollcatControllers.controller('createUserController',function($scope, $http){
             username: $scope.newUserForm.username,
             email: $scope.newUserForm.email,
             password: $scope.newUserForm.password
-        }
+        };
 
         $http.post("http://localhost:8000/create_user/", $scope.newUserForm).
             success(function(data){
@@ -73,7 +67,31 @@ pollcatControllers.controller('createUserController',function($scope, $http){
                 console.log("error");
         });
     }
+});
 
+pollcatControllers.controller('addQuestionController',function($scope, $http){
 
+    $scope.newQuestionForm = {};
+    $scope.newQuestionForm = {
+        q: 'hello',
+        d: 'date'
+    };
 
+    $scope.onSubmit = function(){
+        console.log("submitted");
+        console.log("question: " + $scope.newQuestionForm.q);
+        console.log("date_pub" + $scope.newQuestionForm.d)
+        $scope.dataObject = {
+            question_text: $scope.newQuestionForm.q,
+            pub_date: $scope.newQuestionForm.d
+        };
+        console.log("q = " + $scope.dataObject.question_text);
+
+        $http.post("http://localhost:8000/question_list/", $scope.dataObject).
+            success(function(data){
+                console.log("success");
+        }).error(function(){
+                console.log("error");
+        });
+    }
 });

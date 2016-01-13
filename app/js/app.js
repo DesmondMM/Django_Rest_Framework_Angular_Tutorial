@@ -46,6 +46,10 @@ pollcatApp.config(['$httpProvider','$routeProvider',function($httpProvider, $rou
         templateUrl: 'partials/add-question.html',
         controller: 'PollListController'
       }).
+      when('/add_question', {
+        templateUrl: 'partials/add-question.html',
+        controller: 'addQuestionController'
+      }).
       when('/create_user', {
         templateUrl: 'partials/createUser.html',
         controller: 'createUserController'

@@ -1,22 +1,20 @@
 <h1>Welcome to Add new Question</h1>
-<div>
-    <div class="span3">
-                Question_Text:{{detail.question_text}}
-                <br />
-                <input data-ng-model="question.question_text" type="text" placeholder="Question Text">
-            </div>
+<form ng-submit="onSubmit()"
+     name="newQuestionForm">
 
-    <div class="span3">
-                Date Published:
-                <br />
-                <input data-ng-model="question.pub_date" type="text" placeholder="Date Published">
-            </div>
-        <div class="span3">
-                Choices:
-                <br />
-                Choice 1: <input data-ng-model="choice" type="text" placeholder="Choice">
-                <p>Choice 2<input data-ng-model="choice" type="text" placeholder="Choice"></p>
-            </div>
+    <div class="form-group">
+        <label>Question_Text</label>
+        <input type="text" name="question_text" class="form-control" ng-model="newQuestionForm.q" placeholder="Question Text" required>
+    </div>
 
-    <button id="submitQuestion" class="btn btn-primary" type="button"
-                   data-ng-click="newQuestion()">Add Question</button>
+    <div class="form-group">
+        <label>Date_Published</label>
+        <input type="text" name="pub_date" class="form-control" ng-model="newQuestionForm.d" placeholder="Date_Published, YYYY, MM,DD" required>
+    </div>
+
+    <button type="submit" class="btn-primary">Submit</button>
+    </form>
+
+
+
+
