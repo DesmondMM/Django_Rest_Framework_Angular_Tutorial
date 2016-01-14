@@ -27,10 +27,21 @@ pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
 });
 
 pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $routeParams){
-    $http.get('http://localhost:8000/question_list/' + $routeParams.id).success(function(data) {
-        console.log("id" + $routeParams.id);
-    $scope.detail = data;
+    console.log('hello');
+    console.log('Route' + $routeParams.id);
+    $scope.url = "http://localhost:8000/question_detail/" + $routeParams.id + "/";
+    $http.get($scope.url).success(function(data) {
+        console.log("id = 1");
+
+
+        $scope.detail = data;
+        console.log("GET ID = " + $scope.detail.id);
+        console.log('ID ' + data.id + ' Qn = ' + data.question_text);
     });
+
+
+
+
 
   });
 
@@ -82,10 +93,11 @@ pollcatControllers.controller('addQuestionController',function($scope, $http){
         console.log("question: " + $scope.newQuestionForm.q);
         console.log("date_pub" + $scope.newQuestionForm.d)
         $scope.dataObject = {
-            question_text: $scope.newQuestionForm.q,
-            pub_date: $scope.newQuestionForm.d
+            "question_text": $scope.newQuestionForm.q,
+            "pub_date": $scope.newQuestionForm.d
         };
         console.log("q = " + $scope.dataObject.question_text);
+
 
         $http.post("http://localhost:8000/question_list/", $scope.dataObject).
             success(function(data){
@@ -95,3 +107,46 @@ pollcatControllers.controller('addQuestionController',function($scope, $http){
         });
     }
 });
+
+pollcatControllers.controller('ChoiceListCtrl', function($scope, $http, $routeParams){
+    $http.get('http://localhost:8000/choice_list/' + $routeParams.id).success(function(data) {
+        console.log("id" + $routeParams.id);
+    $scope.detail = data;
+    });
+
+  });
+
+pollcatControllers.controller('createChoiceController',function($scope, $http){
+   var queryy = $http.get('http://localhost:8000/question_list/').success(function(data) {
+    $scope.questions = data;
+     });
+   //$scope.newChoiceForm = {"question": '', "choice_text": '', "votes": ''};
+
+    $scope.testData = {
+    "question": 3,
+    "choice_text": "Who are you",
+    "votes": 3
+    };
+
+   $scope.onSubmit = function(){
+        console.log("submitted");
+        console.log("question" + $scope.newChoiceForm.question);
+       console.log("choice" + $scope.newChoiceForm.choice)
+        $scope.dataObj = {
+            "question": parseInt($scope.newChoiceForm.question),
+            "choice_text": $scope.newChoiceForm.choice,
+            "votes": 0
+
+        };
+
+       console.log("New Choice Qn" + $scope.newChoiceForm.question);
+
+        $http.post("http://localhost:8000/create_choice/", $scope.dataObj).
+            success(function(data){
+                console.log("success");
+        }).error(function(){
+                console.log("error");
+        });
+    }
+});
+
