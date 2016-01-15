@@ -38,11 +38,6 @@ pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $rou
         console.log("GET ID = " + $scope.detail.id);
         console.log('ID ' + data.id + ' Qn = ' + data.question_text);
     });
-
-
-
-
-
   });
 
 pollcatControllers.controller('QuestionListCtrl', ['$scope', '$http', function($scope, $http) {
@@ -98,7 +93,6 @@ pollcatControllers.controller('addQuestionController',function($scope, $http){
         };
         console.log("q = " + $scope.dataObject.question_text);
 
-
         $http.post("http://localhost:8000/question_list/", $scope.dataObject).
             success(function(data){
                 console.log("success");
@@ -113,7 +107,6 @@ pollcatControllers.controller('ChoiceListCtrl', function($scope, $http, $routePa
         console.log("id" + $routeParams.id);
     $scope.detail = data;
     });
-
   });
 
 pollcatControllers.controller('createChoiceController',function($scope, $http){
@@ -121,7 +114,6 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
     $scope.questions = data;
      });
    //$scope.newChoiceForm = {"question": '', "choice_text": '', "votes": ''};
-
       $scope.onSubmit = function(){
         console.log("submitted");
         console.log("question" + $scope.newChoiceForm.question);
@@ -130,11 +122,9 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
             "question": parseInt($scope.newChoiceForm.question),
             "choice_text": $scope.newChoiceForm.choice,
             "votes": 0
-
         };
 
        console.log("New Choice Qn" + $scope.newChoiceForm.question);
-
         $http.post("http://localhost:8000/create_choice/", $scope.dataObj).
             success(function(data){
                 console.log("success");
@@ -147,12 +137,21 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
 pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
   $http.get('http://localhost:8000/choice_list/').success(function(data) {
     $scope.ans_choices = data;
-      console.log(data.id);
+      //console.log(data.id);
   });
   $scope.orderProp = 'question';
 
-    $scope.location = $location;
+  $scope.location = $location.search()['target'];
     console.log("Location = " + $scope.location);
+  if($scope.location){
+      console.log('Location Recieved');
+      console.log("Location = " + $scope.location);
+  }
+
+   $scope.getMsg = function() {
+       alert('Vote Submitted');
+       
+   }
 
 }]);
 

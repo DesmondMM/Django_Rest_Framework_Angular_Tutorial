@@ -7,14 +7,17 @@
 
 </div>
 
-<ul class="questions" ng-controller="ChoiceListCtrl">
+<div class="questions" ng-controller="ChoiceListCtrl">
         <li ng-repeat="ans_choice in ans_choices  | filter:{'question': detail.id}:true">
 
             <label>{{person.name}}
-                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?{{ans_choice.choice_text}}>Click here to vote</a></i>: votes = {{ans_choice.votes}}:  </p>
+                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?target={{ans_choice.choice_text}} ng-click="getMsg()">
+                        Click here to vote</a></i>: votes = {{ans_choice.votes}}:  </p>
             </label>"
         </li>
-  </ul>
+  </div>
+
+
 
 
 
