@@ -148,9 +148,24 @@ pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', '$location',
       console.log("Location = " + $scope.location);
   }
 
-   $scope.getMsg = function() {
+   $scope.voteSubmit = function() {
        alert('Vote Submitted');
-       
+       console.log("submitted question = " + $scope.detail.id);
+       console.log("Selected choice = " + $scope.location);
+        $scope.voteurl = "http://localhost:8000/choices/" + $scope.detail.id + "/";
+
+       $scope.dataObject= {
+            "question": 1,
+            "choice_text": "Not too much",
+            "votes": 5
+        }
+
+       $http.put($scope.voteurl, $scope.dataObject).
+            success(function(data){
+                console.log("success");
+        }).error(function(){
+                console.log("error");
+        });
    }
 
 }]);

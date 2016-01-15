@@ -11,7 +11,7 @@
         <li ng-repeat="ans_choice in ans_choices  | filter:{'question': detail.id}:true">
 
             <label>{{person.name}}
-                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?target={{ans_choice.choice_text}} ng-click="getMsg()">
+                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?target={{ans_choice.choice_text}} ng-click="voteSubmit()">
                         Click here to vote</a></i>: votes = {{ans_choice.votes}}:  </p>
             </label>"
         </li>
