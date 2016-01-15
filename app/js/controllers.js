@@ -14,6 +14,7 @@ pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
         $scope.message = 'Welcome';
           console.log($scope.message);
           console.log(data.token);
+          window.location = "#/questions"
       })
       .error(function (data, status, headers, config) {
         // Erase the token if the user fails to log in
