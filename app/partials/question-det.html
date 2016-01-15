@@ -11,11 +11,10 @@
         <li ng-repeat="ans_choice in ans_choices  | filter:{'question': detail.id}:true">
 
             <label>{{person.name}}
-                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?target={{ans_choice.choice_text}} ng-click="voteSubmit(ans_choice.votes, ans_choice.question.id)">
+                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?target={{ans_choice.choice_text}} ng-click="voteSubmit(ans_choice.votes, ans_choice.question.id, ans_choice.id)">
                         Click here to vote</a></i>: votes = {{ans_choice.votes}}:  </p>
             </label>"
         </li>
-<pre>{{ans_choices | json}}</pre>
   </div>
 
 
