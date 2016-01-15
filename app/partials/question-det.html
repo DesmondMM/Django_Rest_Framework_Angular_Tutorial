@@ -9,14 +9,12 @@
 
 <ul class="questions" ng-controller="ChoiceListCtrl">
         <li ng-repeat="ans_choice in ans_choices  | filter:{'question': detail.id}:true">
+
             <label>{{person.name}}
-                <p>{{ans_choice.choice_text}}: votes = {{ans_choice.votes}}: <a href = #/vote/{{ans_choice.choice_text}}>Click here to vote</a> </p>
-            </label>
+                <p>{{ans_choice.choice_text}}: <i><a href = #/questions/{{detail.id}}?{{ans_choice.choice_text}}>Click here to vote</a></i>: votes = {{ans_choice.votes}}:  </p>
+            </label>"
         </li>
-
-
   </ul>
-
 
 
 
