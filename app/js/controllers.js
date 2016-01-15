@@ -148,16 +148,17 @@ pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', '$location',
       console.log("Location = " + $scope.location);
   }
 
-   $scope.voteSubmit = function() {
+   $scope.voteSubmit = function(votes) {
        alert('Vote Submitted');
        console.log("submitted question = " + $scope.detail.id);
        console.log("Selected choice = " + $scope.location);
+       console.log("votes = " + votes);
         $scope.voteurl = "http://localhost:8000/choices/" + $scope.detail.id + "/";
 
        $scope.dataObject= {
-            "question": 1,
-            "choice_text": "Not too much",
-            "votes": 5
+            "question": $scope.detail.id,
+            "choice_text": $scope.location,
+            "votes": votes + 1
         }
 
        $http.put($scope.voteurl, $scope.dataObject).
