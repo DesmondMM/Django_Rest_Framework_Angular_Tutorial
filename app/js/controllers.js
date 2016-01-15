@@ -32,7 +32,7 @@ pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $rou
     $scope.url = "http://localhost:8000/question_detail/" + $routeParams.id + "/";
     $http.get($scope.url).success(function(data) {
         console.log("id = 1");
-
+        $scope.clickedID = $routeParams.id;
 
         $scope.detail = data;
         console.log("GET ID = " + $scope.detail.id);
@@ -122,13 +122,7 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
      });
    //$scope.newChoiceForm = {"question": '', "choice_text": '', "votes": ''};
 
-    $scope.testData = {
-    "question": 3,
-    "choice_text": "Who are you",
-    "votes": 3
-    };
-
-   $scope.onSubmit = function(){
+      $scope.onSubmit = function(){
         console.log("submitted");
         console.log("question" + $scope.newChoiceForm.question);
        console.log("choice" + $scope.newChoiceForm.choice)
@@ -149,4 +143,39 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
         });
     }
 });
+
+pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', function($scope, $http) {
+  $http.get('http://localhost:8000/choice_list/').success(function(data) {
+    $scope.ans_choices = data;
+  });
+  $scope.orderProp = 'question';
+
+  $scope.voteDet = {};
+
+   $scope.getList = function($scope){
+
+   };
+
+   $scope.onSubmit = function() {
+       console.log("submitted");
+       console.log("selected: " + $scope.selected.choice);
+
+       $scope.dataObject = {
+           "question": $scope.detail.id,
+           "choice_text": $scope.choice_text,
+           "votes": $scope.votes
+       };
+
+
+   };
+    $scope.change = 'data';
+   $scope.getVal = function($scope){
+        console.log($scope.selected.choice);
+        $scope.change=$scope.selected.choice;
+    };
+    console.log($scope.change);
+
+}]);
+
+
 
