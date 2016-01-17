@@ -62,6 +62,9 @@ pollcatApp.config(['$httpProvider','$routeProvider',function($httpProvider, $rou
         templateUrl: 'partials/login.html',
         controller: 'PollListController'
       }).
+        when('/admin', {
+        templateUrl: 'partials/admin.html'
+      }).
       when('/error', {
         template: '<h1>404: Sorry an Error Occured</h1>',
         controller: 'PollListController'

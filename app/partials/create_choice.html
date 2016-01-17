@@ -10,8 +10,6 @@
                         <option ng-repeat="question in questions  | filter:query | orderBy:orderProp">{{question.question_text}}</option>
                    </optgroup>
            </select>
-            {{qn | json}}
-            {{$scope.ques = qn}}
             Ques = {{$scope.ques}}
         </h4>
     </div>

@@ -28,7 +28,6 @@ pollcatControllers.controller('UserCtrl', function ($scope, $http, $window) {
 });
 
 pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $routeParams){
-    console.log('hello');
     console.log('Route' + $routeParams.id);
     $scope.url = "http://localhost:8000/question_detail/" + $routeParams.id + "/";
     $http.get($scope.url).success(function(data) {
@@ -42,8 +41,13 @@ pollcatControllers.controller('QuestionDetailCtrl', function($scope, $http, $rou
   });
 
 pollcatControllers.controller('QuestionListCtrl', ['$scope', '$http', function($scope, $http) {
-  $http.get('http://localhost:8000/question_list/').success(function(data) {
+  $http.get('http://localhost:8000/question_list/').
+  success(function(data) {
     $scope.questions = data;
+  }).
+  error(function(data){
+      console.log("An Error Occurred");
+      window.location = "#/login";
   });
   $scope.orderProp = 'id';
 }]);
@@ -99,21 +103,19 @@ pollcatControllers.controller('addQuestionController',function($scope, $http){
                 console.log("success");
         }).error(function(){
                 console.log("error");
+
         });
     }
 });
 
-pollcatControllers.controller('ChoiceListCtrl', function($scope, $http, $routeParams){
-    $http.get('http://localhost:8000/choice_list/' + $routeParams.id).success(function(data) {
-        console.log("id" + $routeParams.id);
-    $scope.detail = data;
-    });
-  });
-
 pollcatControllers.controller('createChoiceController',function($scope, $http){
    var queryy = $http.get('http://localhost:8000/question_list/').success(function(data) {
     $scope.questions = data;
-     });
+     }).
+  error(function(data){
+      console.log("An Error Occured");
+      window.location = "#/login";
+  });
    //$scope.newChoiceForm = {"question": '', "choice_text": '', "votes": ''};
       $scope.onSubmit = function(){
         console.log("submitted");
@@ -129,8 +131,10 @@ pollcatControllers.controller('createChoiceController',function($scope, $http){
         $http.post("http://localhost:8000/create_choice/", $scope.dataObj).
             success(function(data){
                 console.log("success");
+                alert("Question Choice Added Successfully");
         }).error(function(){
                 console.log("error");
+                alert("Question Choice not Added, try again");
         });
     }
 });
@@ -139,6 +143,11 @@ pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', '$location',
   $http.get('http://localhost:8000/choice_list/').success(function(data) {
     $scope.ans_choices = data;
       //console.log(data.id);
+  }).
+  error(function(data){
+      console.log("An Error Occurred");
+      alert("Please Login to access Questions");
+      window.location = "#/login";
   });
   $scope.orderProp = 'question';
 
@@ -155,7 +164,8 @@ pollcatControllers.controller('ChoiceListCtrl', ['$scope', '$http', '$location',
        console.log("Selected choice = " + $scope.location);
        console.log("votes = " + votes);
        console.log("id = " + id);
-        $scope.voteurl = "http://localhost:8000/choices/" + id + "/";
+
+       $scope.voteurl = "http://localhost:8000/choices/" + id + "/";
 
        $scope.dataObject= {
             "question": $scope.detail.id,
